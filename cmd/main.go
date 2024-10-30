@@ -21,7 +21,7 @@ func main() {
 func crackRar(rarFilePath, fileName string, pwdGenerator <-chan string) {
 	for pwd := range pwdGenerator {
 		//log.Println(pwd)
-		cmd := exec.Command("C:\\Games\\UnRAR.exe", "x", "-p"+pwd, rarFilePath, fileName)
+		cmd := exec.Command("unrar.exe", "x", "-p"+pwd, rarFilePath, fileName)
 		err := cmd.Run()
 		if err == nil {
 			fmt.Println("File extracted")
@@ -47,7 +47,7 @@ func brute(startLength, length int) <-chan string {
 	pwdGenerator := make(chan string)
 
 	go func() {
-		charset := []rune("0123456789абвгде")
+		charset := []rune("набор")
 		base := len(charset)
 
 		var wg sync.WaitGroup
